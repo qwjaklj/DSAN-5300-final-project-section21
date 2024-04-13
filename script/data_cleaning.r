@@ -1,7 +1,7 @@
 library(readr)
 library(dplyr)
-data <- read_csv('GamingStudy_data.csv', locale = locale(encoding = 'ISO-8859-1'))
-age <- read_csv('age.csv')
+data <- read_csv('../data/GamingStudy_data.csv', locale = locale(encoding = 'ISO-8859-1'))
+age <- read_csv('../data/age.csv')
 data_cleaned <- data %>% select(-highestleague, -Reference, -accept, -League, -streams, -Platform)
 unique_games <- unique(data_cleaned$Game)
 age$Proportion <- as.numeric(sub("%", "", age$Proportion)) / 100
