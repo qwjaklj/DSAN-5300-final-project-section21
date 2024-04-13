@@ -1,22 +1,28 @@
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 # Load data
 file_path = '../data/data_cleaned.csv'
 data = pd.read_csv(file_path)
 
-# Fill missing values for numeric columns
-numeric_columns = data.select_dtypes(include=[np.number]).columns
-data[numeric_columns] = data[numeric_columns].fillna(data[numeric_columns].mean())
+numeric_data = data.select_dtypes(include=[np.number])
 
-# Calculate correlation matrix for numeric columns only
-correlations = data[numeric_columns].corr()
+# Handle missing values for numeric columns
+numeric_data = numeric_data.fillna(numeric_data.mean())
 
-# Plotting and saving the correlation matrix
-plt.figure(figsize=(30, 30))
-sns.heatmap(correlations, annot=True, cmap='coolwarm', fmt=".2f")
-plt.title('Correlation Matrix')
-plt.savefig('../image/correlation_matrix.png')
-plt.close()
+# Calculate the correlation matrix for numeric data
+correlation_with_target = numeric_data.corr()['GAD_T'].abs().sort_values(ascending=False)
+
+# Select the top 10 features most correlated with 'GAD_T', excluding the target itself and 'GAD' items
+top_10_features = correlation_with_target[8:18]
+
+plt.figure(figsize=(10, 6))
+sns.barplot(x=top_10_features.values, y=top_10_features.index)
+plt.title('Top 10 Features Most Correlated with GAD_T')
+plt.xlabel('Absolute Correlation Coefficient')
+plt.ylabel('Feature')
+plt.tight_layout()
+plt.savefig('../image/Feature_selection.png')
+plt.show()
