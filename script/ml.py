@@ -98,7 +98,7 @@ for clf_name, clf in classifiers.items():
     # Plot confusion matrix
     cm = confusion_matrix(y_test_clf, y_pred_clf)
     plt.figure(figsize=(8, 6))
-    sns.heatmap(cm, annot=True, fmt='d')
+    sns.heatmap(cm, annot=True, fmt='d',cmap='Blues')
     plt.title(f'{clf_name} Confusion Matrix')
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
