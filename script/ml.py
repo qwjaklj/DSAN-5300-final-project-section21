@@ -73,6 +73,8 @@ for clf_name, clf in classifiers.items():
 
     # Plot ROC curves
     plt.figure()
+    ax = plt.subplot()
+    ax.set_facecolor('#f3efee')
     lw = 2
     plt.plot(fpr["micro"], tpr["micro"],
              label='micro-average ROC curve (area = {0:0.2f})'
@@ -98,6 +100,8 @@ for clf_name, clf in classifiers.items():
     # Plot confusion matrix
     cm = confusion_matrix(y_test_clf, y_pred_clf)
     cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+    ax = plt.subplot()
+    ax.set_facecolor('#f3efee')
     plt.figure(figsize=(8, 6))
     sns.heatmap(cm_normalized, annot=True, fmt=".2%", cmap='Blues')  # Using percentage format
     plt.title(f'{clf_name} Confusion Matrix')
@@ -113,6 +117,8 @@ y_pred_reg = lin_reg.predict(X_test_scaled)
 
 # Plot residuals for linear regression
 plt.figure()
+ax = plt.subplot()
+ax.set_facecolor('#f3efee')
 plt.scatter(y_test, y_test - y_pred_reg, color = "blue", s = 10, label = 'Test data')
 plt.hlines(y = 0, xmin = 0, xmax = 50, linewidth = 2)
 plt.title('Residual errors')

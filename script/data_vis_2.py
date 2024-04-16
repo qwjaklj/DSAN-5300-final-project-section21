@@ -41,6 +41,8 @@ scores_by_game.reset_index(drop=True)
 scores_visualization = scores_by_game.melt(id_vars="Game", var_name="Metric", value_name="Score")
 
 plt.figure(figsize=(14, 8))
+ax = plt.subplot()
+ax.set_facecolor('#f3efee')
 sns.barplot(x="Score", y="Game", hue="Metric", data=scores_visualization)
 plt.title("Average Scores of GAD, SWL, and SPIN by Game")
 plt.xlabel("Average Score")
@@ -61,6 +63,8 @@ scores_by_age_group = data.groupby('Age_Group')[['GAD_T', 'SWL_T', 'SPIN_T']].me
 scores_age_group_visualization = scores_by_age_group.melt(id_vars="Age_Group", var_name="Metric", value_name="Score")
 
 plt.figure(figsize=(14, 8))
+ax = plt.subplot()
+ax.set_facecolor('#f3efee')
 sns.barplot(x="Age_Group", y="Score", hue="Metric", data=scores_age_group_visualization, palette="viridis")
 plt.title("Average Scores of GAD, SWL, and SPIN by Age Group")
 plt.xlabel("Age Group")
@@ -74,6 +78,8 @@ plt.show()
 
 # pie chart for porportion of gamers by age group
 plt.figure(figsize=(8, 8))
+ax = plt.subplot()
+ax.set_facecolor('#f3efee')
 plt.pie(age['Proportion'], labels=age['Age Group'], autopct='%1.1f%%', startangle=140)
 plt.title('Proportion of Gamers by Age Group')
 plt.axis('equal')

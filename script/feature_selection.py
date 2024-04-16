@@ -19,6 +19,8 @@ correlation_with_target = numeric_data.corr()['GAD_T'].abs().sort_values(ascendi
 top_10_features = correlation_with_target[8:18]
 
 plt.figure(figsize=(10, 6))
+ax = plt.subplot()
+ax.set_facecolor('#f3efee')
 sns.barplot(x=top_10_features.values, y=top_10_features.index)
 plt.title('Top 10 Features Most Correlated with GAD_T')
 plt.xlabel('Absolute Correlation Coefficient')

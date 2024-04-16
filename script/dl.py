@@ -47,6 +47,8 @@ print(f'Test accuracy: {accuracy}')
 
 model.save('../dl_result/my_deep_learning_model.h5')
 
+ax = plt.subplot()
+ax.set_facecolor('#f3efee')
 plt.plot(history.history['accuracy'])
 plt.plot(history.history['val_accuracy'])
 plt.title('Model accuracy')
@@ -56,6 +58,8 @@ plt.legend(['Train', 'Validation'], loc='upper left')
 plt.savefig('../dl_result/model_accuracy.png')
 plt.show()
 
+ax = plt.subplot()
+ax.set_facecolor('#f3efee')
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
 plt.title('Model loss')
