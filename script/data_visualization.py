@@ -25,7 +25,7 @@ axes[2].set_title("Distribution of Total SPIN Scores")
 axes[2].set_facecolor('#f3efee') 
 
 plt.tight_layout()
-plt.savefig('../image/distribution_plot.jpg')
+plt.savefig('../image/distribution_plot.jpg', facecolor=fig.get_facecolor())
 plt.show()
 
 
@@ -41,6 +41,6 @@ plt.ylabel("Total GAD Scores")
 plt.xlim(-1, (data['Hours'].quantile(0.95)+1))
 plt.ylim((data['GAD_T'].min()-1), (data['GAD_T'].max()+2)) 
 
-plt.savefig('../image/relationship_plot.jpg')
+plt.savefig('../image/relationship_plot.jpg', facecolor=fig.get_facecolor())
 plt.show()
 

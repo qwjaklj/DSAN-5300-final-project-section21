@@ -50,7 +50,9 @@ plt.ylabel("Game")
 plt.legend(title="Metric", bbox_to_anchor=(1.05, 1), loc='upper left')
 
 plt.tight_layout()
-plt.savefig("../image/average_scores_by_game.png")
+fig = plt.gcf()
+fig.set_facecolor('#f3efee')
+plt.savefig("../image/average_scores_by_game.png", facecolor= fig.get_facecolor())
 plt.show()
 
 # barplot for average scores of GAD, SWL, and SPIN by age group
@@ -72,7 +74,9 @@ plt.ylabel("Average Score")
 plt.legend(title="Metric")
 
 plt.tight_layout()
-plt.savefig("../image/average_scores_by_age_group.png")
+fig = plt.gcf()
+fig.set_facecolor('#f3efee')
+plt.savefig("../image/average_scores_by_age_group.png", facecolor=fig.get_facecolor())
 plt.show()
 
 
@@ -84,6 +88,6 @@ plt.pie(age['Proportion'], labels=age['Age Group'], autopct='%1.1f%%', startangl
 plt.title('Proportion of Gamers by Age Group')
 plt.axis('equal')
 
-plt.savefig("../image/porportions_by_age_group.png")
+plt.savefig("../image/porportions_by_age_group.png", facecolor=fig.get_facecolor())
 plt.show()
 
