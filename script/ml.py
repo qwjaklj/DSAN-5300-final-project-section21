@@ -97,8 +97,9 @@ for clf_name, clf in classifiers.items():
 
     # Plot confusion matrix
     cm = confusion_matrix(y_test_clf, y_pred_clf)
+    cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
     plt.figure(figsize=(8, 6))
-    sns.heatmap(cm, annot=True, fmt='d',cmap='Blues')
+    sns.heatmap(cm_normalized, annot=True, fmt=".2%", cmap='Blues')  # Using percentage format
     plt.title(f'{clf_name} Confusion Matrix')
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
