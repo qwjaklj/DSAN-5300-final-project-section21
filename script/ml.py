@@ -72,7 +72,7 @@ for clf_name, clf in classifiers.items():
     roc_auc["micro"] = auc(fpr["micro"], tpr["micro"])
 
     # Plot ROC curves
-    plt.figure()
+    plt.figure(dpi=300)
     ax = plt.subplot()
     ax.set_facecolor('#f3efee')
     lw = 2
@@ -96,7 +96,7 @@ for clf_name, clf in classifiers.items():
     plt.legend(loc="lower right")
     fig = plt.gcf()
     fig.set_facecolor('#f3efee')
-    plt.savefig(f'../ml_image/{clf_name}_ROC.png',facecolor=fig.get_facecolor())
+    plt.savefig(f'../ml_image/{clf_name}_ROC.png',facecolor=fig.get_facecolor(),dpi=300)
     plt.close()
 
     # Plot confusion matrix
@@ -104,12 +104,12 @@ for clf_name, clf in classifiers.items():
     cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
     ax = plt.subplot()
     ax.set_facecolor('#f3efee')
-    plt.figure(figsize=(8, 6))
+    plt.figure(figsize=(8, 6),dpi=300)
     sns.heatmap(cm_normalized, annot=True, fmt=".2%", cmap='Blues')  # Using percentage format
     plt.title(f'{clf_name} Confusion Matrix')
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
-    plt.savefig(f'../ml_image/{clf_name}_CM.png')
+    plt.savefig(f'../ml_image/{clf_name}_CM.png',dpi=300)
     plt.close()
 
 # Linear Regression does not need ROC as it is not a classification model
@@ -118,7 +118,7 @@ lin_reg.fit(X_train_scaled, y_train)
 y_pred_reg = lin_reg.predict(X_test_scaled)
 
 # Plot residuals for linear regression
-plt.figure()
+plt.figure(dpi=300)
 ax = plt.subplot()
 ax.set_facecolor('#f3efee')
 plt.scatter(y_test, y_test - y_pred_reg, color = "blue", s = 10, label = 'Test data')
@@ -126,5 +126,5 @@ plt.hlines(y = 0, xmin = 0, xmax = 50, linewidth = 2)
 plt.title('Residual errors')
 fig = plt.gcf()
 fig.set_facecolor('#f3efee')
-plt.savefig(f'../ml_image/LinearRegression_Residuals.png', facecolor=fig.get_facecolor())
+plt.savefig(f'../ml_image/LinearRegression_Residuals.png', facecolor=fig.get_facecolor(),dpi=300)
 plt.close()

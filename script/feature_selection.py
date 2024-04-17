@@ -18,7 +18,7 @@ correlation_with_target = numeric_data.corr()['GAD_T'].abs().sort_values(ascendi
 # Select the top 10 features most correlated with 'GAD_T', excluding the target itself and 'GAD' items
 top_10_features = correlation_with_target[8:18]
 
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(10, 6),dpi=300)
 ax = plt.subplot()
 ax.set_facecolor('#f3efee')
 sns.barplot(x=top_10_features.values, y=top_10_features.index)
@@ -26,5 +26,5 @@ plt.title('Top 10 Features Most Correlated with GAD_T')
 plt.xlabel('Absolute Correlation Coefficient')
 plt.ylabel('Feature')
 plt.tight_layout()
-plt.savefig('../image/Feature_selection.png')
+plt.savefig('../image/Feature_selection.png',dpi=300)
 plt.show()

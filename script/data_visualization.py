@@ -9,7 +9,7 @@ import seaborn as sns
 
 sns.set_style("whitegrid")
 
-fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+fig, axes = plt.subplots(1, 3, figsize=(18, 5),dpi=300)
 fig.set_facecolor('#f3efee')
 
 sns.histplot(data=data, x="GAD_T", bins=20, kde=True, ax=axes[0], color="skyblue")
@@ -25,13 +25,13 @@ axes[2].set_title("Distribution of Total SPIN Scores")
 axes[2].set_facecolor('#f3efee') 
 
 plt.tight_layout()
-plt.savefig('../image/distribution_plot.jpg', facecolor=fig.get_facecolor())
+plt.savefig('../image/distribution_plot.jpg', facecolor=fig.get_facecolor(),dpi=300)
 plt.show()
 
 
 
 
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(10, 6),dpi=300)
 ax = plt.subplot()
 ax.set_facecolor('#f3efee')
 sns.regplot(data=data, x="Hours", y="GAD_T", scatter_kws={'alpha':0.5, 'edgecolor':'none', 'color':'blue'}, line_kws={'color':'red'})
@@ -41,6 +41,6 @@ plt.ylabel("Total GAD Scores")
 plt.xlim(-1, (data['Hours'].quantile(0.95)+1))
 plt.ylim((data['GAD_T'].min()-1), (data['GAD_T'].max()+2)) 
 
-plt.savefig('../image/relationship_plot.jpg', facecolor=fig.get_facecolor())
+plt.savefig('../image/relationship_plot.jpg', facecolor=fig.get_facecolor(),dpi=300)
 plt.show()
 
