@@ -1,4 +1,5 @@
 import pandas as pd
+import statsmodels.api as sm
 data = pd.read_csv('../data/data_cleaned.csv',encoding='ISO-8859-1')
 data.head()
 age = pd.read_csv('../data/age_final.csv')
@@ -28,19 +29,22 @@ plt.tight_layout()
 plt.savefig('../image/distribution_plot.jpg', facecolor=fig.get_facecolor())
 plt.show()
 
+data = data.dropna(subset=['Hours'])
+X_GAD_T = sm.add_constant(data['GAD_T'])
+poisson_model_gad = sm.GLM(data['Hours'], X_GAD_T, family=sm.families.Poisson()).fit()
 
-
+data['predicted_hours'] = poisson_model_gad.predict(X_GAD_T)
+hours_95th_percentile = data['Hours'].quantile(0.95)
 
 plt.figure(figsize=(10, 6))
-ax = plt.subplot()
-ax.set_facecolor('#f3efee')
-sns.regplot(data=data, x="Hours", y="GAD_T", scatter_kws={'alpha':0.5, 'edgecolor':'none', 'color':'blue'}, line_kws={'color':'red'})
-plt.title("Relationship between Time Spent on Gaming and Anxiety with Fitted Line")
-plt.xlabel("Hours Spent on Gaming per Week")
-plt.ylabel("Total GAD Scores")
-plt.xlim(-1, (data['Hours'].quantile(0.95)+1))
-plt.ylim((data['GAD_T'].min()-1), (data['GAD_T'].max()+2)) 
-
+sns.scatterplot(x='GAD_T', y='Hours', data=data, alpha=0.5, label='Actual Data')
+sns.lineplot(x='GAD_T', y='predicted_hours', data=data, color='red', label='Poisson Prediction')
+plt.title('Poisson Model Prediction vs Actual Hours Played by GAD_T Scores')
+plt.xlabel('GAD_T Scores')
+plt.ylabel('Hours Played')
+plt.ylim(0, hours_95th_percentile + 10)  # Adding a small buffer above the 95th percentile
+plt.legend()
+plt.grid(True)
 plt.savefig('../image/relationship_plot.jpg', facecolor=fig.get_facecolor())
 plt.show()
 
