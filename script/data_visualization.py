@@ -10,7 +10,7 @@ import seaborn as sns
 
 sns.set_style("whitegrid")
 
-fig, axes = plt.subplots(1, 3, figsize=(18, 5))
+fig, axes = plt.subplots(1, 3, figsize=(18, 5),dpi=300)
 fig.set_facecolor('#f3efee')
 
 sns.histplot(data=data, x="GAD_T", bins=20, kde=True, ax=axes[0], color="skyblue")
@@ -26,7 +26,7 @@ axes[2].set_title("Distribution of Total SPIN Scores")
 axes[2].set_facecolor('#f3efee') 
 
 plt.tight_layout()
-plt.savefig('../image/distribution_plot.jpg', facecolor=fig.get_facecolor())
+plt.savefig('../image/distribution_plot.jpg', facecolor=fig.get_facecolor(),dpi=300)
 plt.show()
 
 data = data.dropna(subset=['Hours'])
@@ -36,6 +36,7 @@ poisson_model_gad = sm.GLM(data['Hours'], X_GAD_T, family=sm.families.Poisson())
 data['predicted_hours'] = poisson_model_gad.predict(X_GAD_T)
 hours_95th_percentile = data['Hours'].quantile(0.95)
 
+<<<<<<< HEAD
 plt.figure(figsize=(10, 6))
 sns.scatterplot(x='GAD_T', y='Hours', data=data, alpha=0.5, label='Actual Data')
 sns.lineplot(x='GAD_T', y='predicted_hours', data=data, color='red', label='Poisson Prediction')
@@ -46,5 +47,18 @@ plt.ylim(0, hours_95th_percentile + 10)  # Adding a small buffer above the 95th 
 plt.legend()
 plt.grid(True)
 plt.savefig('../image/relationship_plot.jpg', facecolor=fig.get_facecolor())
+=======
+plt.figure(figsize=(10, 6),dpi=300)
+ax = plt.subplot()
+ax.set_facecolor('#f3efee')
+sns.regplot(data=data, x="Hours", y="GAD_T", scatter_kws={'alpha':0.5, 'edgecolor':'none', 'color':'blue'}, line_kws={'color':'red'})
+plt.title("Relationship between Time Spent on Gaming and Anxiety with Fitted Line")
+plt.xlabel("Hours Spent on Gaming per Week")
+plt.ylabel("Total GAD Scores")
+plt.xlim(-1, (data['Hours'].quantile(0.95)+1))
+plt.ylim((data['GAD_T'].min()-1), (data['GAD_T'].max()+2)) 
+
+plt.savefig('../image/relationship_plot.jpg', facecolor=fig.get_facecolor(),dpi=300)
+>>>>>>> refs/remotes/origin/main
 plt.show()
 
